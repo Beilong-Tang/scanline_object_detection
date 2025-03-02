@@ -43,6 +43,9 @@ def main(args):
     ## Load class map
     with open(config['label_map'], "r") as f:
         label_map_dict = yaml.safe_load(f)
+    
+    ## load acc_focus
+    acc_focus = config['acc_focus']
 
     ## load model
     if config['type'] == "MobileNet":
@@ -143,11 +146,17 @@ def main(args):
                     if (pred[i] == _true_label):
                         acc_all[_true_label.item()][0] +=1
 
+            acc_each = {}
             for k, value in acc_all.items():
-                acc_all[k] = value[0] / value[1]
+                acc_each[k] = value[0] / value[1]
 
-            print(f"Eval epoch {e}: loss: {(loss.item()/(len(pbar))):.3f}, acc: {(acc/len(pbar)):.3f}, {acc_all}")
-        hist['eval_epoch'].append({"loss": loss.item() / (len(pbar)), "acc": acc / (len(pbar)), "acc_all": acc_all})
+            ## Calculate weighted accuracy
+            acc_weight = { k: acc_all[k][0] / acc_all[k][1]  for k in acc_focus}
+            weights = { k: 1 / acc_all[k][1]  for k in acc_focus}
+            weighted_acc = sum(weights[cls] * acc_weight[cls] for cls in acc_weight) / sum(weights.values())
+
+            print(f"Eval epoch {e}: loss: {(loss.item()/(len(pbar))):.3f}, acc: {(acc/len(pbar)):.3f}, acc_w: {weighted_acc:.3f}, {acc_each}")
+        hist['eval_epoch'].append({"loss": loss.item() / (len(pbar)), "acc": acc / (len(pbar)), "acc_w": weighted_acc,  "acc_each": acc_each})
         torch.save(model.state_dict(), str(ckpt_path / f'epochs_{e}.pth'))
     torch.save(hist, str(ckpt_path / 'hist.pth'))
 

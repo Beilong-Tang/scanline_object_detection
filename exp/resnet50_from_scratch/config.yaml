@@ -17,6 +17,10 @@ weighted_loss: false
 
 augmentation: null
 
+acc_focus:
+  - 1
+  - 2
+
 epochs: 20 # Train for 10 epochs
 
 batch_size: 16 # Dont matter here, as we will iterate data one by one
