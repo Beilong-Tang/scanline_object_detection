@@ -146,8 +146,8 @@ def main(args):
             for k, value in acc_all.items():
                 acc_all[k] = value[0] / value[1]
 
-            print(f"Eval epoch {e}: loss: {(loss.item()/(i+1)):.3f}, acc: {(acc/(i+1)):.3f}, {acc_all}")
-        hist['eval_epoch'].append({"loss": loss.item() / (i+1), "acc": acc / (i+1), "acc_all": acc_all})
+            print(f"Eval epoch {e}: loss: {(loss.item()/(len(pbar))):.3f}, acc: {(acc/len(pbar)):.3f}, {acc_all}")
+        hist['eval_epoch'].append({"loss": loss.item() / (len(pbar)), "acc": acc / (len(pbar)), "acc_all": acc_all})
         torch.save(model.state_dict(), str(ckpt_path / f'epochs_{e}.pth'))
     torch.save(hist, str(ckpt_path / 'hist.pth'))
 
