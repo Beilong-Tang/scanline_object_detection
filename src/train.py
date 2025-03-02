@@ -82,7 +82,7 @@ def main(args):
         loss_fn = torch.nn.CrossEntropyLoss()
 
     ## Save the ckpt
-    ckpt_path = 'ckpt' / Path(args.config).parent.stem / Path(args.config).stem
+    ckpt_path = Path('ckpt') / Path(args.config).parent.stem / Path(args.config).stem
     os.makedirs(str(ckpt_path), exist_ok=True)
     print(f"saving model to {ckpt_path}")
 
