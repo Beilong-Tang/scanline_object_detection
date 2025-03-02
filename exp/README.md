@@ -1,1 +1,1 @@
-The folder to put all the experiments in
+This folder contains all the experiments.
