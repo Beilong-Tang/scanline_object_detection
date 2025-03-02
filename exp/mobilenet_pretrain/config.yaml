@@ -12,7 +12,7 @@ num_workers: 4
 type: MobileNet # the type of networks to train [ResNet50, MobileNet]
 model_config:
   mode: pretrained
-  ckpt: /DKUdata/tangbl/courses/CS302_CV/final_project/src/ckpt/resnet50-0676ba61.pth
+  ckpt: /DKUdata/tangbl/courses/CS302_CV/final_project/src/ckpt/mobilenet_v2-b0353104.pth
 
 
 ## Training
