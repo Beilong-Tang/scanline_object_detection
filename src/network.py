@@ -18,8 +18,8 @@ class ResNet50(nn.Module):
                 for p in model.parameters():
                     p.requires_grad = False
                 pass
-        model.classifier[-1] = nn.Linear(2048, num_classes, bias=True)
-        for p in model.classifier[-1].parameters():
+        model.fc = nn.Linear(2048, num_classes, bias=True)
+        for p in model.fc.parameters():
             p.requires_grad = True
         print(f"ResNet50 parameters: {sum([ p.numel() for p in model.parameters()])}")
         self.model = model
