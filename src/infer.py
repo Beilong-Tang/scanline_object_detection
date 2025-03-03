@@ -114,7 +114,7 @@ def get_objects(frames, line, thick = 2):
     contours, _ = cv2.findContours(image_fg, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     for cnt in contours:
         y, x, w, h = cv2.boundingRect(cnt)
-        if w > 40 and w < 400 and h < 200:
+        if w > 40 and w < 400 and h < 50:
             ## Threshold
             time_start = int(x / thick)
             time_end = int((x+h)/thick)
