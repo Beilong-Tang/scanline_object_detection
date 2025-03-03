@@ -58,12 +58,6 @@ def main(args):
             model = ResNet50(num_classes=len(label_map_dict), **config['model_config'])
         else:
             model = ResNet50(num_classes=len(label_map_dict))
-    
-    # ## Loading pretrained models
-    # if args.pretrained is not None:
-    #     print(f"Loading pretrained model from {args.pretrained}")
-    #     state = torch.load(args.pretrained, map_location='cpu')
-    #     model.load_state_dict(state)
 
     model.cuda()
 

@@ -1,0 +1,37 @@
+seed: 1234
+
+## Data
+label_map: conf/map.yaml
+tr_data: conf/train_data.scp
+cv_data: conf/val_data.scp
+paddng: null
+
+num_workers: 4
+
+## Model
+type: ResNet50 # the type of networks to train [ResNet50, MobileNet]
+model_config:
+  mode: pretrained
+  ckpt: /DKUdata/tangbl/courses/CS302_CV/final_project/src/ckpt/resnet50-0676ba61.pth
+
+
+## Training
+weighted_loss: true
+
+augmentation: null
+
+acc_focus:
+  - 1
+  - 2
+
+epochs: 20 # Train for 10 epochs
+
+batch_size: 16 # Dont matter here, as we will iterate data one by one
+
+optim:
+  type: Adam
+  lr: 1.0e-3
+
+log_inverval: 10
+
+grad_clip: 5

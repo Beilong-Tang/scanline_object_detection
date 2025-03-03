@@ -72,7 +72,7 @@ class ResizeDataset(Dataset):
                 if augmentation is not None:
                     ## Apply augmentations here
                     if key in augmentation:
-                        scp.append(i, int(key), True)
+                        scp.append([i, int(key), True])
 
         log_info={}
         for _, cls, _ in scp:
