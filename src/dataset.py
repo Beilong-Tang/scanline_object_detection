@@ -105,7 +105,7 @@ class ResizeDataset(Dataset):
         if flip:
             ## Apply flipping
             img = np.fliplr(img)
-        if self.padding is not None:
+        if self.padding is True:
             img = pad_center(img, (224,224))
         else:
             img = skimage.transform.resize(img, self.resize, mode='reflect', anti_aliasing=True) # [H,W,C]
