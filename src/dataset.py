@@ -52,7 +52,7 @@ class ResizeDataset(Dataset):
             for line in f.readlines():
                 content = line.replace("\n","").split(" ")
                 path = content[2]
-                cls = map_dict[int(content[1])]
+                cls = map_dict[int(content[1])][0]
                 if scp_dict.get(cls) is None: 
                     scp_dict[cls] = [path]
                 else:
